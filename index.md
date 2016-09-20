@@ -11,7 +11,7 @@ They are different, but they sometimes interfere with each other. So, it can be 
 
 #### From posts front matter
 
-**Categories** variable is an array it can be set like this in posts front matter :
+**categories** variable is an array it can be set like this in posts front matter :
 
 ``` yaml
 ---
@@ -23,7 +23,7 @@ categories:
 ---
 ```
 
-**Category** variable can be a string, an integer or an array it can be set like this in posts front matter :
+**category** variable can be a string, an integer or an array it can be set like this in posts front matter :
 
 ``` yaml
 ---
@@ -84,3 +84,27 @@ Posts present in `_posts/default` folder will have :
 <p>category : {{ post.category | inspect }}</p>
 <p>categories : {% if post.categories %}{{ post.categories | join: ", " }}{% endif %}</p>
 {% endfor %}
+
+### Listing by category
+
+{% for c in site.categories %}
+
+#### {{ c[0] }}
+
+post count  {{ c[1] | size }}
+
+{% for p in c[1] %}
+
+post title : {{ p.title }}
+
+{% comment %}
+post previous : {{ p.previous | inspect }}
+{% endcomment %}
+post previous title : {{ p.previous.title | inspect }}
+
+{% endfor %}
+
+{% endfor %}
+
+
+
